@@ -62,6 +62,7 @@ stoker download-assets
 Similar to `docker run`, booting a new Firecracker microVM instance is virtually instant:
 
 ![Stoker Run Demo](./docs/assets/stoker-run.gif | width=100)
+<img src=https://github.com/zer0touch/stoker/blob/main/docs/assets/stoker-run.gif width=100% height=100%>
 
 ```bash
 stoker run --name my-server
