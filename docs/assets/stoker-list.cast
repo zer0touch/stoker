@@ -1,0 +1,4 @@
+{"version":3,"term":{"cols":24,"rows":12,"type":"xterm-256color","theme":{"fg":"#787c99","bg":"#16161e","palette":"#363b54:#f7768e:#73daca:#e0af68:#7aa2f7:#bb9af7:#7dcfff:#787c99:#363b54:#f7768e:#41a6b5:#e0af68:#7aa2f7:#bb9af7:#7dcfff:#acb0d0"}},"timestamp":1771617702,"command":"stoker list","env":{"SHELL":"/bin/zsh"}}
+[0.054, "o", "CONTAINER ID         IMAGE           STATUS          NAMES                IP             \r\n"]
+[0.000, "o", "fc_00                ubuntu:24.04    Up              web                  172.16.0.2     \r\n"]
+[0.003, "x", "0"]
