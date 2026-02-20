@@ -58,6 +58,8 @@ stoker download-assets
 
 Similar to `docker run`, booting a new Firecracker microVM instance is virtually instant:
 
+[![asciicast](https://asciinema.org/a/docs/assets/stoker-run.cast.png)](https://asciinema.org/a/docs/assets/stoker-run.cast)
+
 ```bash
 stoker run --name my-server
 ```
@@ -73,6 +75,8 @@ This will automatically:
 
 Because `stoker run` establishes a daemon in the background with full NAT capabilities, you can interface natively utilizing automatic RSA proxying:
 
+[![asciicast](https://asciinema.org/a/docs/assets/stoker-list.cast.png)](https://asciinema.org/a/docs/assets/stoker-list.cast)
+
 ```bash
 stoker list
 # CONTAINER ID         IMAGE           STATUS          NAMES                IP             
@@ -87,6 +91,8 @@ stoker ssh my-server
 
 When you are finished, you can cleanly tear down the networking TAP devices and Firecracker Unix sockets:
 
+[![asciicast](https://asciinema.org/a/docs/assets/stoker-rm.cast.png)](https://asciinema.org/a/docs/assets/stoker-rm.cast)
+
 ```bash
 stoker rm my-server
 ```
@@ -94,6 +100,8 @@ stoker rm my-server
 ### Listing Images
 
 You can view the custom `.ext4` offline root filesystems you have built natively using `stoker images`:
+
+[![asciicast](https://asciinema.org/a/docs/assets/stoker-images.cast.png)](https://asciinema.org/a/docs/assets/stoker-images.cast)
 
 ```bash
 stoker images

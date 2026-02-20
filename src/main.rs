@@ -218,3 +218,62 @@ provision:
     
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use clap::Parser;
+
+    #[test]
+    fn test_cli_run_defaults() {
+        let args = vec!["stoker", "run"];
+        let cli = Cli::try_parse_from(args).unwrap();
+        match cli.command {
+            Commands::Run { mode, name, image } => {
+                assert_eq!(mode, "internet");
+                assert_eq!(name, None);
+                assert_eq!(image, None);
+            }
+            _ => panic!("Expected Run command"),
+        }
+    }
+
+    #[test]
+    fn test_cli_run_custom() {
+        let args = vec!["stoker", "run", "--name", "my-server", "--image", "nginx-image", "--mode", "local"];
+        let cli = Cli::try_parse_from(args).unwrap();
+        match cli.command {
+            Commands::Run { mode, name, image } => {
+                assert_eq!(mode, "local");
+                assert_eq!(name, Some("my-server".to_string()));
+                assert_eq!(image, Some("nginx-image".to_string()));
+            }
+            _ => panic!("Expected Run command"),
+        }
+    }
+
+    #[test]
+    fn test_cli_build() {
+        let args = vec!["stoker", "build", "--image-name", "custom-build", "--script-path", "/path/to/script.sh"];
+        let cli = Cli::try_parse_from(args).unwrap();
+        match cli.command {
+            Commands::Build { image_name, script_path } => {
+                assert_eq!(image_name, "custom-build");
+                assert_eq!(script_path, "/path/to/script.sh");
+            }
+            _ => panic!("Expected Build command"),
+        }
+    }
+
+    #[test]
+    fn test_cli_ssh() {
+        let args = vec!["stoker", "ssh", "my-server"];
+        let cli = Cli::try_parse_from(args).unwrap();
+        match cli.command {
+            Commands::Ssh { name } => {
+                assert_eq!(name, "my-server");
+            }
+            _ => panic!("Expected Ssh command"),
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{"version":3,"term":{"cols":24,"rows":12,"type":"xterm-256color","theme":{"fg":"#787c99","bg":"#16161e","palette":"#363b54:#f7768e:#73daca:#e0af68:#7aa2f7:#bb9af7:#7dcfff:#787c99:#363b54:#f7768e:#41a6b5:#e0af68:#7aa2f7:#bb9af7:#7dcfff:#acb0d0"}},"timestamp":1771617721,"command":"stoker rm recording-demo","env":{"SHELL":"/bin/zsh"}}
+[0.005, "o", "Proxying to Lima VM: limactl shell firecracker-vm bash -l -c 'sudo stoker rm recording-demo'\r\n"]
+[0.045, "o", "Removing VM 'recording-demo'...\r\nTerminated Firecracker daemon (PID: 22634)\r\n"]
+[0.011, "o", "Deleted TAP interface natively: tap-inet-1\r\n"]
+[0.010, "o", "Cleaned up all resources for stoker-recording-demo\r\nVM 'recording-demo' successfully removed.\r\n"]
+[0.003, "x", "0"]
