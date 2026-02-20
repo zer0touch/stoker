@@ -105,3 +105,14 @@ pub fn list_images() -> Result<()> {
     }
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_asset_path() {
+        let expected = format!("{}/test.ext4", ASSET_DIR);
+        assert_eq!(get_asset_path("test.ext4"), expected);
+    }
+}

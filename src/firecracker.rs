@@ -138,8 +138,12 @@ pub async fn run_vm(mode: &str, name_opt: Option<String>, image_opt: Option<Stri
 }
 
 fn allocate_vm_id() -> Result<u8> {
+    allocate_vm_id_in_dir("/tmp")
+}
+
+fn allocate_vm_id_in_dir(tmp_dir: &str) -> Result<u8> {
     let mut used_ids = std::collections::HashSet::new();
-    if let Ok(entries) = std::fs::read_dir("/tmp") {
+    if let Ok(entries) = std::fs::read_dir(tmp_dir) {
         for entry in entries.flatten() {
             let fname = entry.file_name().to_string_lossy().to_string();
             if fname.starts_with("stoker-") && fname.ends_with(".json") {
@@ -234,4 +238,44 @@ pub fn list_vms() -> Result<()> {
     }
     
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs::{self, File};
+    use std::io::Write;
+    use std::time::{SystemTime, UNIX_EPOCH};
+
+    #[test]
+    fn test_allocate_vm_id_in_dir() -> Result<()> {
+        let timestamp = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis();
+        let test_dir = format!("/tmp/stoker-test-{}", timestamp);
+        fs::create_dir_all(&test_dir)?;
+
+        // Empty directory
+        let id1 = allocate_vm_id_in_dir(&test_dir)?;
+        assert_eq!(id1, 0);
+
+        // Occupy ID 0
+        let meta_0 = InstanceMetadata {
+            id: 0,
+            name: "test-0".to_string(),
+            mode: "internet".to_string(),
+            guest_ip: "172.16.0.2".to_string(),
+            host_ip: "172.16.0.1".to_string(),
+            mac_address: "00:00:00:00".to_string(),
+            tap_device: "tap-inet-0".to_string(),
+            pid: 1234,
+        };
+        let mut file = File::create(format!("{}/stoker-test-0.json", test_dir))?;
+        file.write_all(serde_json::to_string(&meta_0)?.as_bytes())?;
+
+        // Expect ID 1
+        let id2 = allocate_vm_id_in_dir(&test_dir)?;
+        assert_eq!(id2, 1);
+
+        fs::remove_dir_all(&test_dir)?;
+        Ok(())
+    }
 }
