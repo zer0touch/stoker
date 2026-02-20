@@ -1,6 +1,6 @@
 # Stoker
 
-![Stoker Logo](.docs/assets/logo_white_small.jpeg)
+![Stoker Logo](./docs/assets/logo_white_small.jpeg)
 
 **Stoker** is a lightweight, natively compiled command-line interface written in Rust designed to mimic Docker for managing Firecracker MicroVMs.
 
